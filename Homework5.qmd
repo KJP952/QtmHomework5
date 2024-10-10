@@ -1,0 +1,106 @@
+---
+title: "Homework5"
+author: "Katie Park"
+date: "2024-10-9"
+format:
+  html: default
+  pdf: default
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+wdi <- read.csv("wdi.csv")
+```
+
+```{r}
+summary(wdi$gdp_per_capita)
+summary(wdi$primary_school_enrolment_rate)
+summary(wdi$adult_literacy_rate)
+```
+
+# Summary gdp_per_capita
+The summary of gdp_per_capita shows that the lowest GDP per capita for a country is $259, which suggests that the country has low economic output per person. The median of the countries is 7588 which shows the middle value of all the countires. The mean is 20346 which suggest that there are many countries with low GDP per capita, but some countries have very high GDP which scews the mean to a high value.
+
+# Summary primary_school_enrolment_rate
+The summary of primary school enrollment rate shows that the minimum enrollment rate is 64.4% which means a country has only 64.4% of primary aged people enrolled in school. The median is 100.02 and the mean is 100.87 which are relative similar which suggests that most countries have all of their primary aged people enrolled in school. The maximum is 138.19 which suggests over-enrolledment in schools.  
+
+# Summary adult literacy rate
+The summary of gdp adult literacy rate shows that the minimum adult literacy rate is 27.28% which shows that some countires have very low literacy levels among adults. The median is 83.78 which shows that half of the countries in the data set have a literacy rate above and below this level. The mean is 79.57 and is lower than the median which suggests that there a more countires with lower literacy rates. 
+
+# Adult Literacy Rates by Country (Table 1)
+```{r, echo=FALSE}
+wdi_filtered <- wdi %>%
+  filter(!is.na(gdp_per_capita) & !is.na(adult_literacy_rate) & !is.na(primary_school_enrolment_rate))
+
+ggplot(wdi_filtered, aes(x = reorder(country, adult_literacy_rate), y = adult_literacy_rate)) +
+   geom_bar(stat = "identity", fill = "steelblue") +
+   labs(title = "Adult Literacy Rates by Country") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+```
+[Data source, click here](wdi.csv)
+
+# GDP Per Capita By Country (Table 2)
+
+```{r, echo=FALSE}
+  ggplot(wdi_filtered, aes(x = reorder(country, gdp_per_capita), y = gdp_per_capita)) +
+   geom_bar(stat = "identity", fill = "steelblue") +
+   labs(title = "GDP per capita by Country") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+```
+[Data source, click here](wdi.csv)
+
+# GDP Per Capita and Adult Literacy Rate (Table 3)
+```{r, echo=FALSE}
+
+ggplot(wdi_filtered, aes(x = gdp_per_capita, y = adult_literacy_rate)) +
+  geom_point(color = "blue") +
+  labs(title = "Comparison of Adult Literacy Rate and GDP per Capita",
+       x = "GDP per Capita",
+       y = "Adult Literacy Rate") +
+  theme_minimal()
+
+```
+[Data source, click here](wdi.csv)
+
+# Primary School Enrollment and Adult Literacy Rate (Table 4)
+```{r,echo=FALSE}
+ggplot(wdi_filtered, aes(x = primary_school_enrolment_rate, y = adult_literacy_rate)) +
+  geom_point(color = "darkorange") +
+  labs(title = "Comparison of Primary School Enrollment and Adult Literacy Rate",
+       x = "Primary School Enrollment Rate",
+       y = "Adult Literacy Rate") +
+  theme_minimal()
+
+```
+[Data source, click here](wdi.csv)
+
+| Key statistics|
+|----------|
+| Table 3 shows that Countries that had high GDP per capital, tend to have have higer adult literacy rates than lower GPD per capital counties|
+|Table 1 and 2 shows that countries that had recorded GDP per captia and adult literacy rates are mostly non-western countries.|
+|Table 4 shows that higher primary school enrollment rates tened to have higher adult literacy rates|
+|Table 4 shows that over 100% primary school enrollment rates led to lower adult literacy rates|
+
+@article
+https://ourworldindata.org/grapher/literacy-rate-vs-gdp-per-capita
+
+@article{LiteracyRatevsGDPperCaptia,
+  title={Literacy rate vs. GDP per capita, 2023},
+  author={Our world in Data},
+  year={2023},
+  url={https://ourworldindata.org/grapher/literacy-rate-vs-gdp-per-capita},
+  publisher={Our world in Data}
+}
+
+@article{relationshipbtwenEcnomicAndSchool,
+  title={The Relationship between Economic Growth and School Enrollment Rates: Time Series
+Evidence from Turkey},
+  aurthor={Sedat Gumus, Selim Kayhan}
+  year={2012},
+  url={https://files.eric.ed.gov/fulltext/EJ1127574.pdf},
+  publisher={Inased}
+}

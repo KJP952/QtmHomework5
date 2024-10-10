@@ -1,0 +1,71 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Homework5\"\n",
+        "author: \"Katie Park\"\n",
+        "date: \"2024-10-9\"\n",
+        "format:\n",
+        "    pdf:\n",
+        "        fig_width: 3\n",
+        "        fig_height: 2\n",
+        "        margin: 2in\n",
+        "---"
+      ],
+      "id": "1193ab3f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "\n",
+        "df = pd.read_csv('wdi.csv')"
+      ],
+      "id": "34b095a7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "summary = df[['gdp_per_capita', 'inflation_rate', 'life_expectancy']].describe()\n",
+        "print(summary)"
+      ],
+      "id": "ece5fb69",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "plt.figure(figsize=(10, 6))\n",
+        "sns.histplot(df['gdp_per_capita'], bins=30, kde=True)\n",
+        "plt.title('Distribution of GDP per Capita (2022)')\n",
+        "plt.xlabel('GDP per Capita')\n",
+        "plt.ylabel('Frequency')\n",
+        "plt.show()"
+      ],
+      "id": "ad48aa51",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/katiepark/Library/Python/3.9/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
